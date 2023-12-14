@@ -12,6 +12,16 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+    const TABLE = "users";
+
+    const ROLE_USER = "user";
+    const ROLE_ADMINISTRATOR = "administrator";
+    const ROLES = [
+        self::ROLE_USER, self::ROLE_ADMINISTRATOR,
+    ];
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +31,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    public function setRoleAttribute(string $value)
+    {
+        if (in_array($value, self::ROLES)){
+            throw new \Error('Invalid role. Avaliable roles are: '.implode(',',slef::ROLES));
+        }
+        $this->attributes['role'] = $value;
+    }
 
     /**
      * The attributes that should be hidden for serialization.
