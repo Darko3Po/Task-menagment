@@ -2,8 +2,7 @@
 
 @section('content')
 
-
-
+    @livewire('create-task')
 
 @endsection
 
