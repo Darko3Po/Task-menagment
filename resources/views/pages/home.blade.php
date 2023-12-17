@@ -2,7 +2,10 @@
 
 @section('content')
 
-    @livewire('create-task')
+
+    <div>
+        <livewire:create-post  />
+    </div>
 
 @endsection
 
